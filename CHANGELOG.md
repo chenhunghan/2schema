@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.3](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.2...2schema-v1.0.3) (2025-03-16)
+
+
+### Bug Fixes
+
+* fix decorator ([483dd93](https://github.com/chenhunghan/2schema/commit/483dd9372a84a3ac9e95ceac3bb57c6beaa1f36e))
+* simple fn decorator types ([aeedd21](https://github.com/chenhunghan/2schema/commit/aeedd21626db8883fff507f342c37ca11cd5f44a))
+
 ## [1.0.2](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.1...2schema-v1.0.2) (2025-03-16)
 
 
