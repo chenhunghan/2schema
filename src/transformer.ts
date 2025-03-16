@@ -126,7 +126,9 @@ export default function transformerProgram(program: ts.Program) {
                       functionDescription,
                       paramaterDescriptions,
                       strict,
-                      parameter
+                      parameter,
+                      automate,
+                      parser
                     )
                   );
                   // Create the decorator function

@@ -50,7 +50,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: [{ name: "abc", type: "string", description: "" }] }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: [{ name: "abc", type: "string", description: "" }] }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -113,7 +113,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: [{ name: "abc", type: "number", description: "" }] }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: [{ name: "abc", type: "number", description: "" }] }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -176,7 +176,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: [{ name: "abc", type: "boolean", description: "" }] }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: [{ name: "abc", type: "boolean", description: "" }] }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -246,7 +246,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: [{ name: "abc", type: ["string", "null"], description: "" }] }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: [{ name: "abc", type: ["string", "null"], description: "" }] }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -316,7 +316,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: [{ name: "abc", type: ["string", "number", "null"], description: "" }] }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: [{ name: "abc", type: ["string", "number", "null"], description: "" }] }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -663,7 +663,7 @@ describe("transformer", async () => {
         expect(transform(code)).toMatchInlineSnapshot(`
           "const __example__json__schema = {
               type: "function",
-              function: { name: "example", description: "This is a function for test", strict: true, parameters: [{ name: "abc", type: "string", description: "" }] }
+              function: { function: example, parse: JSON.parse, name: "example", description: "This is a function for test", strict: true, parameters: [{ name: "abc", type: "string", description: "" }] }
           };
           function __decorate__example__json__schema(target, context) {
               function method(...args) { return target.call(this, ...args); }
@@ -726,7 +726,7 @@ describe("transformer", async () => {
         expect(transform(code)).toMatchInlineSnapshot(`
           "const __example__json__schema = {
               type: "function",
-              function: { name: "example", description: "", strict: false, parameters: [{ name: "abc", type: "string", description: "" }] }
+              function: { function: example, parse: JSON.parse, name: "example", description: "", strict: false, parameters: [{ name: "abc", type: "string", description: "" }] }
           };
           function __decorate__example__json__schema(target, context) {
               function method(...args) { return target.call(this, ...args); }
@@ -789,7 +789,7 @@ describe("transformer", async () => {
         expect(transform(code)).toMatchInlineSnapshot(`
           "const __example__json__schema = {
               type: "function",
-              function: { name: "example", description: "", strict: false, parameters: [{ name: "abc", type: "string", description: "This is a parameter for test" }] }
+              function: { function: example, parse: JSON.parse, name: "example", description: "", strict: false, parameters: [{ name: "abc", type: "string", description: "This is a parameter for test" }] }
           };
           function __decorate__example__json__schema(target, context) {
               function method(...args) { return target.call(this, ...args); }

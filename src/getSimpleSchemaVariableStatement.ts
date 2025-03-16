@@ -10,7 +10,9 @@ export function getSimpleSchemaVariableStatement(
     [key: string]: Record<string, string>;
   },
   strict: boolean,
-  parameter: ts.ParameterDeclaration
+  parameter: ts.ParameterDeclaration,
+  automate: boolean,
+  parser: string
 ) {
   const typeName = typeChecker.typeToString(
     typeChecker.getTypeAtLocation(parameter)
@@ -38,7 +40,7 @@ export function getSimpleSchemaVariableStatement(
     };
 
     const functionSchemaExpression =
-      createSimpleFunctionSchemaExpression(functionSchema);
+      createSimpleFunctionSchemaExpression(functionSchema, automate, parser);
 
     const schemaVariableName = `__${methodName}__json__schema`;
 
@@ -68,7 +70,7 @@ export function getSimpleSchemaVariableStatement(
   };
 
   const functionSchemaExpression =
-    createSimpleFunctionSchemaExpression(functionSchema);
+    createSimpleFunctionSchemaExpression(functionSchema, automate, parser);
 
   const schemaVariableName = `__${methodName}__json__schema`;
 
