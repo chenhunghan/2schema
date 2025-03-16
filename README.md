@@ -17,17 +17,9 @@ const tools = [{
         "parameters": {
             "type": "object",
             "properties": {
-                "location": {
-                    "type": "string",
-                    "description": "City and country e.g. Bogotá, Colombia"
-                }
+                // lif is too short for schema
             },
-            "required": [
-                "location"
-            ],
-            "additionalProperties": false
         },
-        "strict": true
     }
 }];
 
