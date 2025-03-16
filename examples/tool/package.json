@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "openai": "^4.86.2"
+    "openai": "^4.87.3"
   },
   "devDependencies": {
     "ts-node": "^10.9.2",
