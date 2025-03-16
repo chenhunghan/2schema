@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.3...2schema-v1.1.0) (2025-03-16)
+
+
+### Features
+
+* improve typing of exported decorator ([9d89769](https://github.com/chenhunghan/2schema/commit/9d897696e1b173bfc92b0c45519c1ea8f6a69266))
+
 ## [1.0.3](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.2...2schema-v1.0.3) (2025-03-16)
 
 
