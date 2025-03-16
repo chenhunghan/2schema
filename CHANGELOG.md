@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/chenhunghan/2schema/compare/2schema-v1.1.0...2schema-v1.1.1) (2025-03-16)
+
+
+### Bug Fixes
+
+* include definition files ([09eb8d5](https://github.com/chenhunghan/2schema/commit/09eb8d56650659da8c94345c713e37e30600ec0f))
+* move transformer to project root ([ace0a60](https://github.com/chenhunghan/2schema/commit/ace0a603e22f69ff2f302635c0566ca9601245e1))
+
 ## [1.1.0](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.3...2schema-v1.1.0) (2025-03-16)
 
 
