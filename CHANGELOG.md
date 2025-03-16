@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/chenhunghan/2schema/compare/2schema-v1.1.1...2schema-v1.1.2) (2025-03-16)
+
+
+### Bug Fixes
+
+* fix transformer import ([e49066c](https://github.com/chenhunghan/2schema/commit/e49066c769ae6ae0c1611327f2f71c82b5d7895f))
+
 ## [1.1.1](https://github.com/chenhunghan/2schema/compare/2schema-v1.1.0...2schema-v1.1.1) (2025-03-16)
 
 
