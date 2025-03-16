@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "plugins": [{ "transform": "../../src/transformer.ts" }],
+    "skipLibCheck": true
+  },
+  "exclude": ["node_modules"]
+}
