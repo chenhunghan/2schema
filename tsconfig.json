@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "target": "ES2015",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
     "skipLibCheck": true,
     "lib": ["ES2017"],
     "outDir": "dist",
+    "declaration": true,
   },
   "exclude": ["node_modules", "dist", "examples", "vitest.config.ts", "**/*.test.ts", "**/*.spec.ts"]
 }

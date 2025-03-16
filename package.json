@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "enhance tooling for AI agents",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "test": "vitest",
     "build": "tsc"
