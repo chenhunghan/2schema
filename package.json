@@ -1,6 +1,6 @@
 {
   "name": "2schema",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "enhance tooling for AI agents",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

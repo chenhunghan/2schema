@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.0...2schema-v1.0.1) (2025-03-16)
+
+
+### Bug Fixes
+
+* fix typo ([6151b0f](https://github.com/chenhunghan/2schema/commit/6151b0f9c0a5db6e1e611903eb94b951db98a98b))
+
 ## 1.0.0 (2025-03-16)
 
 
