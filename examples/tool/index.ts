@@ -1,51 +1,43 @@
 import OpenAI from "openai";
+import { fn } from "../../src";
 
-const client = new OpenAI();
+declare global {
+  interface Function {
+    toJSONSchema: () => any;
+  }
+}
+
+const openai = new OpenAI();
+
+class Tools {
+  @fn
+  static async getCurrentLocation() {
+    return "Boston"; // Simulate lookup
+  }
+
+  @fn
+  static async getWeather(args: { location: string }) {
+    return { temperature: 15, precipitation: 90 };
+  }
+}
 
 async function main() {
-  const runner = client.beta.chat.completions
-    .runTools({
-      model: "gpt-4o",
-      messages: [{ role: "user", content: "How is the weather this week?" }],
-      tools: [
-        {
-          type: "function",
-          function: {
-            description: "Get the current location of the user.",
-            function: getCurrentLocation,
-            parse: JSON.parse, // or use a validation library like zod for typesafe parsing.
-            parameters: { type: "object", properties: {} },
-          },
-        },
-        {
-          type: "function",
-          function: {
-            description: "Get the weather for a location.",
-            function: getWeather,
-            parse: JSON.parse, // or use a validation library like zod for typesafe parsing.
-            parameters: {
-              type: "object",
-              properties: {
-                location: { type: "string" },
-              },
-            },
-          },
-        },
-      ],
-    })
-    .on("message", (message) => console.log(message));
+  const tools = [
+    Tools.getCurrentLocation.toJSONSchema(),
+    Tools.getWeather.toJSONSchema(),
+  ];
+  console.log(tools);
 
-  const finalContent = await runner.finalContent();
-  console.log();
-  console.log("Final content:", finalContent);
-}
+  const completion = await openai.chat.completions.create({
+    model: "gpt-4o",
+    messages: [
+      { role: "user", content: "What is the weather like at current location?" },
+    ],
+    tools,
+    store: true,
+  });
 
-async function getCurrentLocation() {
-  return "Boston"; // Simulate lookup
-}
-
-async function getWeather(args: { location: string }) {
-  return { temperature: 15, precipitation: 90 };
+  console.log(completion.choices[0].message.tool_calls);
 }
 
 main();

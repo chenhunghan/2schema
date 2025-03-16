@@ -3,7 +3,9 @@
     "target": "ES2015",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "lib": ["ES2017"],
+    "outDir": "dist",
   },
-  "exclude": ["node_modules", "vitest.config.ts", "**/*.test.ts", "**/*.spec.ts"]
+  "exclude": ["node_modules", "dist", "examples", "vitest.config.ts", "**/*.test.ts", "**/*.spec.ts"]
 }
