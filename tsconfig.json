@@ -5,8 +5,7 @@
     "moduleResolution": "Node",
     "skipLibCheck": true,
     "lib": ["ES2017"],
-    "outDir": "dist",
     "declaration": true,
   },
-  "exclude": ["node_modules", "dist", "examples", "vitest.config.ts", "**/*.test.ts", "**/*.spec.ts"]
+  "exclude": ["node_modules", "examples", "vitest.config.ts", "**/*.test.ts", "**/*.spec.ts"]
 }

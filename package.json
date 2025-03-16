@@ -2,10 +2,15 @@
   "name": "2schema",
   "version": "1.0.3",
   "description": "enhance tooling for AI agents",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "files": [
-    "dist/**/*"
+    "**/*.js",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "index.d.ts",
+    "package.json"
   ],
   "scripts": {
     "test": "vitest",
