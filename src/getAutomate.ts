@@ -1,5 +1,7 @@
 import * as ts from "typescript";
 
+export const automateDefault = false;
+
 export function getAutomate(decorator: ts.ModifierLike) {
   if (decorator && ts.isDecorator(decorator)) {
     const expression = decorator.expression;
@@ -19,9 +21,12 @@ export function getAutomate(decorator: ts.ModifierLike) {
           if (initializer.kind === ts.SyntaxKind.FalseKeyword) {
             return false
           }
+          if (initializer.kind === ts.SyntaxKind.TrueKeyword) {
+            return true
+          }
         }
       }
     }
   }
-  return true;
+  return automateDefault;
 }
