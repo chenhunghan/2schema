@@ -4,7 +4,8 @@
   "description": "enhance tooling for AI agents",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
