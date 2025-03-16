@@ -2,7 +2,7 @@
   "name": "2schema",
   "version": "0.0.1",
   "description": "enhance tooling for AI agents",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "vitest",
     "build": "tsc"
