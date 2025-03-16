@@ -1462,7 +1462,7 @@ describe("transformer", async () => {
     });
   });
 
-  test("skips if the method doesn't have any parameters", async () => {
+  test("if the method doesn't have any parameters, just return schema", async () => {
     // Transformer setup (for testing)
     const transform = (code: string) => {
       const sourceFile = ts.createSourceFile(
@@ -1493,8 +1493,17 @@ describe("transformer", async () => {
       `;
 
     expect(transform(code)).toMatchInlineSnapshot(`
-      "class Tools {
-          @fn
+      "const __example__json__schema = {
+          type: "function",
+          function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: {}, required: [], additionalProperties: false } }
+      };
+      function __decorate__example__json__schema(target, context) {
+          function method(...args) { return target.call(this, ...args); }
+          method.toJSONSchema = () => __example__json__schema;
+          return method;
+      }
+      class Tools {
+          @__decorate__example__json__schema
           static example(): string {
               return "";
           }

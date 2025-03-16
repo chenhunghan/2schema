@@ -11,7 +11,6 @@ import { getAdditionalProperties } from "./getAdditionalProperties";
 import { getParameterDescriptions } from "./getParameterDescriptions";
 import { getArraySchemaVariableStatement } from "./getArraySchemaVariableStatement";
 
-// Transformer
 export default function transformerProgram(program: ts.Program) {
   const typeChecker = program.getTypeChecker();
 
@@ -29,10 +28,6 @@ export default function transformerProgram(program: ts.Program) {
               const method = member;
               const methodName = member.name.getText();
 
-              if (method.parameters.length === 0) {
-                return member;
-              }
-
               const fnDecorator = member.modifiers?.find((modifier) =>
                 isDecorator(modifier, "fn")
               );
@@ -43,12 +38,71 @@ export default function transformerProgram(program: ts.Program) {
               }
 
               const functionDescription = getFunctionDescription(fnDecorator);
-              const paramaterDescriptions =
-                getParameterDescriptions(fnDecorator);
               const strict = getFunctionStrict(fnDecorator);
-
               const decoratorName = `__decorate__${methodName}__json__schema`;
               const schemaName = `__${methodName}__json__schema`;
+              
+              // has @fn but no parameters
+              if (method.parameters.length === 0 && fnDecorator) {
+                const functionSchema = {
+                  type: "function",
+                  function: {
+                    name: methodName,
+                    description: functionDescription,
+                    parameters: {
+                      type: "object",
+                      properties: {},
+                      required: []
+                    },
+                    strict,
+                  },
+                };
+                const functionSchemaExpression =
+                createFunctionSchemaExpression(functionSchema);
+
+                const schemaVariableDeclaration = createVariableStatement(
+                  schemaName,
+                  functionSchemaExpression
+                );
+  
+                schemas.push(schemaVariableDeclaration);
+  
+                // Create the decorator function
+                const decoratorFunction = createDecoratorDeclaration(
+                  decoratorName,
+                  schemaName
+                );
+  
+                decorators.push(decoratorFunction);
+  
+                // replace the `fn` decorator with the new decorator
+                const modifierWithOutFn = member.modifiers?.filter(
+                  (modifier) => !isDecorator(modifier, "fn")
+                );
+  
+                return ts.factory.updateMethodDeclaration(
+                  member,
+                  [
+                    ts.factory.createDecorator(
+                      ts.factory.createIdentifier(decoratorName)
+                    ),
+                    ...(modifierWithOutFn || []),
+                  ],
+                  member.asteriskToken,
+                  member.name,
+                  member.questionToken,
+                  member.typeParameters,
+                  member.parameters,
+                  member.type,
+                  member.body
+                );
+
+                return member;
+              }
+
+              
+              const paramaterDescriptions =
+                getParameterDescriptions(fnDecorator);
 
               if (method.parameters.length === 1) {
                 const parameter = method.parameters[0];
