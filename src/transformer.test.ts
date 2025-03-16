@@ -386,7 +386,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { type: "string" } } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { type: "string" } } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -456,7 +456,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { type: "number" } } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { type: "number" } } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -526,7 +526,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { oneOf: [{ type: "string" }, { type: "number" }] } } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { oneOf: [{ type: "string" }, { type: "number" }] } } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -596,7 +596,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { type: "{ id: number; item: string; }" } } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { name: "abc", type: "array", description: "", items: { type: "{ id: number; item: string; }" } } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -855,7 +855,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "string", description: "" }, bar: { type: "number", description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "string", description: "" }, bar: { type: "number", description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -1002,7 +1002,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: ["string", "null"], description: "" }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: ["string", "null"], description: "" }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -1076,7 +1076,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "array", description: "", items: { type: "string" } }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "array", description: "", items: { type: "string" } }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -1150,7 +1150,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "array", description: "", items: { type: "{ a: string; b: number; }" } }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "array", description: "", items: { type: "{ a: string; b: number; }" } }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -1305,7 +1305,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "array", description: "", items: { type: "number" } }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "array", description: "", items: { type: "number" } }, bar: { type: ["string", "number", "null"], description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -1372,7 +1372,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "string", description: "" }, bar: { type: "number", description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: true } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "string", description: "" }, bar: { type: "number", description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: true } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -1440,7 +1440,7 @@ describe("transformer", async () => {
       expect(transform(code)).toMatchInlineSnapshot(`
         "const __example__json__schema = {
             type: "function",
-            function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "string", description: "" }, bar: { type: "number", description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
+            function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: { foo: { type: "string", description: "" }, bar: { type: "number", description: "" }, bool: { type: "boolean", description: "" } }, required: ["foo", "bar", "bool"], additionalProperties: false } }
         };
         function __decorate__example__json__schema(target, context) {
             function method(...args) { return target.call(this, ...args); }
@@ -1460,6 +1460,94 @@ describe("transformer", async () => {
         "
       `);
     });
+  });
+
+  test("handles 2+ decorators", async () => {
+    // Transformer setup (for testing)
+    const transform = (code: string) => {
+      const sourceFile = ts.createSourceFile(
+        "",
+        code,
+        ts.ScriptTarget.Latest,
+        true
+      );
+
+      const program = ts.createProgram({
+        rootNames: [],
+        options: {
+          target: ts.ScriptTarget.ESNext,
+          module: ts.ModuleKind.CommonJS,
+        },
+      });
+
+      const result = ts.transform(sourceFile, [transformer(program)]);
+      return ts.createPrinter().printFile(result.transformed[0]);
+    };
+    const code = `
+      class Tools {
+        @fn
+        static one(): string {
+          return "";
+        }
+
+        @fn
+        static two(a: string): string {
+          return "";
+        }
+
+        @fn
+        static three({ b }: { b: number }): string {
+          return "";
+        }
+      }
+      `;
+
+    expect(transform(code)).toMatchInlineSnapshot(`
+      "const __one__json__schema = {
+          type: "function",
+          function: { function: one, parse: JSON.parse, name: "one", description: "", strict: true, parameters: { type: "object", properties: {}, required: [], additionalProperties: false } }
+      };
+      const __two__json__schema = {
+          type: "function",
+          function: { function: two, parse: JSON.parse, name: "two", description: "", strict: true, parameters: { type: "object", properties: { 0: { type: "a", description: "" }, 1: { type: "n", description: "" }, 2: { type: "y", description: "" } }, required: ["0", "1", "2"], additionalProperties: false } }
+      };
+      const __three__json__schema = {
+          type: "function",
+          function: { function: three, parse: JSON.parse, name: "three", description: "", strict: true, parameters: { type: "object", properties: { 0: { type: "a", description: "" }, 1: { type: "n", description: "" }, 2: { type: "y", description: "" } }, required: ["0", "1", "2"], additionalProperties: false } }
+      };
+      function __decorate__one__json__schema(target, context) {
+          function method(...args) { return target.call(this, ...args); }
+          method.toJSONSchema = () => __one__json__schema;
+          return method;
+      }
+      function __decorate__two__json__schema(target, context) {
+          function method(...args) { return target.call(this, ...args); }
+          method.toJSONSchema = () => __two__json__schema;
+          return method;
+      }
+      function __decorate__three__json__schema(target, context) {
+          function method(...args) { return target.call(this, ...args); }
+          method.toJSONSchema = () => __three__json__schema;
+          return method;
+      }
+      class Tools {
+          @__decorate__one__json__schema
+          static one(): string {
+              return "";
+          }
+          @__decorate__two__json__schema
+          static two(a: string): string {
+              return "";
+          }
+          @__decorate__three__json__schema
+          static three({ b }: {
+              b: number;
+          }): string {
+              return "";
+          }
+      }
+      "
+    `);
   });
 
   test("if the method doesn't have any parameters, just return schema", async () => {
@@ -1495,7 +1583,7 @@ describe("transformer", async () => {
     expect(transform(code)).toMatchInlineSnapshot(`
       "const __example__json__schema = {
           type: "function",
-          function: { name: "example", description: "", strict: true, parameters: { type: "object", properties: {}, required: [], additionalProperties: false } }
+          function: { function: example, parse: JSON.parse, name: "example", description: "", strict: true, parameters: { type: "object", properties: {}, required: [], additionalProperties: false } }
       };
       function __decorate__example__json__schema(target, context) {
           function method(...args) { return target.call(this, ...args); }

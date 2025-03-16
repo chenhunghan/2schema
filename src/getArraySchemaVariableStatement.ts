@@ -10,7 +10,9 @@ export function getArraySchemaVariableStatement(
   },
   strict: boolean,
   parameter: ts.ParameterDeclaration,
-  elementTypeString: string | string[]
+  elementTypeString: string | string[],
+  automated: boolean,
+  parser: string
 ) {
   const schemaVariableName = `__${methodName}__json__schema`;
   // item is union type
@@ -37,8 +39,8 @@ export function getArraySchemaVariableStatement(
         ],
       },
     };
-  
-    return schemaToDeclaration(schemaVariableName, functionSchema);
+
+    return schemaToDeclaration(schemaVariableName, functionSchema, automated, parser);
   }
   const functionSchema = {
     type: "function",
@@ -51,8 +53,7 @@ export function getArraySchemaVariableStatement(
           name: parameter.name.getText(),
           type: "array",
           description:
-            parameterDescriptions[parameter.name.getText()]?.description ??
-            "",
+            parameterDescriptions[parameter.name.getText()]?.description ?? "",
           items: {
             type: elementTypeString,
           },
@@ -61,12 +62,25 @@ export function getArraySchemaVariableStatement(
     },
   };
 
-  return schemaToDeclaration(schemaVariableName, functionSchema);
+  return schemaToDeclaration(
+    schemaVariableName,
+    functionSchema,
+    automated,
+    parser
+  );
 }
 
-function schemaToDeclaration(schemaVariableName: string, functionSchema: any) {
-  const functionSchemaExpression =
-  createArrayFunctionSchemaExpression(functionSchema);
+function schemaToDeclaration(
+  schemaVariableName: string,
+  functionSchema: any,
+  automated: boolean,
+  parser: string
+) {
+  const functionSchemaExpression = createArrayFunctionSchemaExpression(
+    functionSchema,
+    automated,
+    parser
+  );
 
   const functionSchemaVariableDeclaration = createVariableStatement(
     schemaVariableName,

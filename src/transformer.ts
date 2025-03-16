@@ -10,6 +10,8 @@ import { getFunctionStrict } from "./getFunctionStrict";
 import { getAdditionalProperties } from "./getAdditionalProperties";
 import { getParameterDescriptions } from "./getParameterDescriptions";
 import { getArraySchemaVariableStatement } from "./getArraySchemaVariableStatement";
+import { getAutomate } from "./getAutomate";
+import { getParser } from "./getParser";
 
 export default function transformerProgram(program: ts.Program) {
   const typeChecker = program.getTypeChecker();
@@ -38,6 +40,8 @@ export default function transformerProgram(program: ts.Program) {
               }
 
               const functionDescription = getFunctionDescription(fnDecorator);
+              const automate = getAutomate(fnDecorator);
+              const parser = getParser(fnDecorator);
               const strict = getFunctionStrict(fnDecorator);
               const decoratorName = `__decorate__${methodName}__json__schema`;
               const schemaName = `__${methodName}__json__schema`;
@@ -58,7 +62,7 @@ export default function transformerProgram(program: ts.Program) {
                   },
                 };
                 const functionSchemaExpression =
-                createFunctionSchemaExpression(functionSchema);
+                createFunctionSchemaExpression(functionSchema, automate, parser);
 
                 const schemaVariableDeclaration = createVariableStatement(
                   schemaName,
@@ -96,11 +100,8 @@ export default function transformerProgram(program: ts.Program) {
                   member.type,
                   member.body
                 );
-
-                return member;
               }
 
-              
               const paramaterDescriptions =
                 getParameterDescriptions(fnDecorator);
 
@@ -171,7 +172,9 @@ export default function transformerProgram(program: ts.Program) {
                     paramaterDescriptions,
                     strict,
                     parameter,
-                    elementTypeString
+                    elementTypeString,
+                    automate,
+                    parser
                   );
 
                   schemas.push(functionSchema);
@@ -224,7 +227,9 @@ export default function transformerProgram(program: ts.Program) {
                     paramaterDescriptions,
                     strict,
                     parameter,
-                    elementType
+                    elementType,
+                    automate,
+                    parser
                   );
 
                   schemas.push(functionSchema);
@@ -312,7 +317,7 @@ export default function transformerProgram(program: ts.Program) {
               }
 
               const functionSchemaExpression =
-                createFunctionSchemaExpression(functionSchema);
+                createFunctionSchemaExpression(functionSchema, automate, parser);
 
               const schemaVariableDeclaration = createVariableStatement(
                 schemaName,
