@@ -17,7 +17,7 @@ const tools = [{
         "parameters": {
             "type": "object",
             "properties": {
-                // lif is too short for schema
+                // life is too short for schema
             },
         },
     }
