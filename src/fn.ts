@@ -2,19 +2,19 @@ type FnOptions = {
   /**
    * The description of function, what does it do.
    */
-  description: string,
+  description: string;
   /**
    * The description of parameters of function
    */
-  parameters: Map<string, { description: string }>,
+  parameters: Record<string, { description: string }>;
   /**
    * output schema with function.strict = true|false, default is true
    */
-  strict?: boolean,
+  strict?: boolean;
   /**
    * output schema with function.additionalProperties = true|false, default is false
    */
-  additionalProperties?: boolean,
+  additionalProperties?: boolean;
 };
 
-export function fn(options?: FnOptions): any {};
+export function fn(options?: FnOptions): any {}
