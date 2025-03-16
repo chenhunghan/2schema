@@ -11,6 +11,9 @@
     "README.md",
     "CHANGELOG.md",
     "index.d.ts",
+    "transformer.d.ts",
+    "transformer.js",
+    "transformer.test.ts",
     "package.json"
   ],
   "scripts": {

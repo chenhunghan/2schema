@@ -1,17 +1,17 @@
 import * as ts from "typescript";
-import { getTypeInfoFromObject } from "./getTypeInfoFromObject";
-import { createFunctionSchemaExpression } from "./createFunctionSchemaExpression";
-import { isDecorator } from "./findDecorator";
-import { getSimpleSchemaVariableStatement } from "./getSimpleSchemaVariableStatement";
-import { createVariableStatement } from "./createVariableStatement";
-import { createDecoratorDeclaration } from "./createDecoratorDeclaration";
-import { getFunctionDescription } from "./getFunctionDescription";
-import { getFunctionStrict } from "./getFunctionStrict";
-import { getAdditionalProperties } from "./getAdditionalProperties";
-import { getParameterDescriptions } from "./getParameterDescriptions";
-import { getArraySchemaVariableStatement } from "./getArraySchemaVariableStatement";
-import { getAutomate } from "./getAutomate";
-import { getParser } from "./getParser";
+import { getTypeInfoFromObject } from "./src/getTypeInfoFromObject";
+import { createFunctionSchemaExpression } from "./src/createFunctionSchemaExpression";
+import { isDecorator } from "./src/findDecorator";
+import { getSimpleSchemaVariableStatement } from "./src/getSimpleSchemaVariableStatement";
+import { createVariableStatement } from "./src/createVariableStatement";
+import { createDecoratorDeclaration } from "./src/createDecoratorDeclaration";
+import { getFunctionDescription } from "./src/getFunctionDescription";
+import { getFunctionStrict } from "./src/getFunctionStrict";
+import { getAdditionalProperties } from "./src/getAdditionalProperties";
+import { getParameterDescriptions } from "./src/getParameterDescriptions";
+import { getArraySchemaVariableStatement } from "./src/getArraySchemaVariableStatement";
+import { getAutomate } from "./src/getAutomate";
+import { getParser } from "./src/getParser";
 
 export default function transformerProgram(program: ts.Program) {
   const typeChecker = program.getTypeChecker();
