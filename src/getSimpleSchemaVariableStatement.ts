@@ -11,6 +11,7 @@ export function getSimpleSchemaVariableStatement(
   },
   strict: boolean,
   parameter: ts.ParameterDeclaration,
+  className: string,
   automate: boolean,
   parser: string
 ) {
@@ -40,7 +41,7 @@ export function getSimpleSchemaVariableStatement(
     };
 
     const functionSchemaExpression =
-      createSimpleFunctionSchemaExpression(functionSchema, automate, parser);
+      createSimpleFunctionSchemaExpression(functionSchema, className, automate, parser);
 
     const schemaVariableName = `__${methodName}__json__schema`;
 
@@ -70,7 +71,7 @@ export function getSimpleSchemaVariableStatement(
   };
 
   const functionSchemaExpression =
-    createSimpleFunctionSchemaExpression(functionSchema, automate, parser);
+    createSimpleFunctionSchemaExpression(functionSchema, className, automate, parser);
 
   const schemaVariableName = `__${methodName}__json__schema`;
 

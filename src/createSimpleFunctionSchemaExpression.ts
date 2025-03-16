@@ -1,6 +1,6 @@
 import * as ts from "typescript";
 
-export function createSimpleFunctionSchemaExpression(schema: any, automated: boolean, parser: string): ts.Expression {
+export function createSimpleFunctionSchemaExpression(schema: any, className: string, automated: boolean, parser: string): ts.Expression {
   return ts.factory.createObjectLiteralExpression(
     [
       ts.factory.createPropertyAssignment(
@@ -13,7 +13,7 @@ export function createSimpleFunctionSchemaExpression(schema: any, automated: boo
           ...(automated ? [
             ts.factory.createPropertyAssignment(
               "function",
-              ts.factory.createIdentifier(schema.function.name)
+              ts.factory.createIdentifier(`${className}.${schema.function.name}`)
             ),
           ] : []),
           ...(automated ? [

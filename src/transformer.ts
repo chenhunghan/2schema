@@ -26,6 +26,7 @@ export default function transformerProgram(program: ts.Program) {
       const visitor = (node: ts.Node): ts.Node => {
         if (ts.isClassDeclaration(node) && node.name) {
           const newMethods = node.members.map((member) => {
+            const className = node.name.getText();
             if (ts.isMethodDeclaration(member)) {
               const method = member;
               const methodName = member.name.getText();
@@ -62,7 +63,7 @@ export default function transformerProgram(program: ts.Program) {
                   },
                 };
                 const functionSchemaExpression =
-                createFunctionSchemaExpression(functionSchema, automate, parser);
+                createFunctionSchemaExpression(functionSchema, className, automate, parser);
 
                 const schemaVariableDeclaration = createVariableStatement(
                   schemaName,
@@ -127,6 +128,7 @@ export default function transformerProgram(program: ts.Program) {
                       paramaterDescriptions,
                       strict,
                       parameter,
+                      className,
                       automate,
                       parser
                     )
@@ -175,6 +177,7 @@ export default function transformerProgram(program: ts.Program) {
                     strict,
                     parameter,
                     elementTypeString,
+                    className,
                     automate,
                     parser
                   );
@@ -230,6 +233,7 @@ export default function transformerProgram(program: ts.Program) {
                     strict,
                     parameter,
                     elementType,
+                    className,
                     automate,
                     parser
                   );
@@ -319,7 +323,7 @@ export default function transformerProgram(program: ts.Program) {
               }
 
               const functionSchemaExpression =
-                createFunctionSchemaExpression(functionSchema, automate, parser);
+                createFunctionSchemaExpression(functionSchema, className, automate, parser);
 
               const schemaVariableDeclaration = createVariableStatement(
                 schemaName,

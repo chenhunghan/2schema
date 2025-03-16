@@ -11,6 +11,7 @@ export function getArraySchemaVariableStatement(
   strict: boolean,
   parameter: ts.ParameterDeclaration,
   elementTypeString: string | string[],
+  className: string,
   automated: boolean,
   parser: string
 ) {
@@ -40,7 +41,7 @@ export function getArraySchemaVariableStatement(
       },
     };
 
-    return schemaToDeclaration(schemaVariableName, functionSchema, automated, parser);
+    return schemaToDeclaration(schemaVariableName, functionSchema, className, automated, parser);
   }
   const functionSchema = {
     type: "function",
@@ -65,6 +66,7 @@ export function getArraySchemaVariableStatement(
   return schemaToDeclaration(
     schemaVariableName,
     functionSchema,
+    className,
     automated,
     parser
   );
@@ -73,11 +75,13 @@ export function getArraySchemaVariableStatement(
 function schemaToDeclaration(
   schemaVariableName: string,
   functionSchema: any,
+  className: string,
   automated: boolean,
   parser: string
 ) {
   const functionSchemaExpression = createArrayFunctionSchemaExpression(
     functionSchema,
+    className,
     automated,
     parser
   );
