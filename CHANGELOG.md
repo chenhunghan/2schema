@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.1...2schema-v1.0.2) (2025-03-16)
+
+
+### Bug Fixes
+
+* fix example main file name ([737e1c6](https://github.com/chenhunghan/2schema/commit/737e1c6d6aed2f6f4b6986d4877a877740627ca1))
+
 ## [1.0.1](https://github.com/chenhunghan/2schema/compare/2schema-v1.0.0...2schema-v1.0.1) (2025-03-16)
 
 
