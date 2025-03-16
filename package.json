@@ -6,6 +6,7 @@
   "types": "index.d.ts",
   "files": [
     "**/*.js",
+    "**/*.d.ts",
     "LICENSE",
     "README.md",
     "CHANGELOG.md",
