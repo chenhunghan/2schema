@@ -1,5 +1,5 @@
 import { fn } from "./src/fn";
-import transfomer from "./src/transformer";
+import transfomer from "./transformer";
 
 export { fn, transfomer };
 export default transfomer;
