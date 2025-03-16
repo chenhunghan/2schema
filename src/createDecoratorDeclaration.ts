@@ -1,7 +1,7 @@
 import * as ts from "typescript";
 import { makeFactorialDecorator } from "./makeFactorialDecorator";
 
-export function createDecoratorDeclaration(decoratorName, schemaVariableName) {
+export function createDecoratorDeclaration(decoratorName: string, schemaVariableName: string) {
   return makeFactorialDecorator(decoratorName, [
     ts.factory.createFunctionDeclaration(
       undefined,
