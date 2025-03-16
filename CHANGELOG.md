@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.3](https://github.com/chenhunghan/2schema/compare/2schema-v1.1.2...2schema-v1.1.3) (2025-03-16)
+
+
+### Bug Fixes
+
+* fix formatting ([adc3f74](https://github.com/chenhunghan/2schema/commit/adc3f7446cc6d4cf58a5c7d8023e848235f67d03))
+
 ## [1.1.2](https://github.com/chenhunghan/2schema/compare/2schema-v1.1.1...2schema-v1.1.2) (2025-03-16)
 
 
