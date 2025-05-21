@@ -1,5 +1,6 @@
 import * as ts from "typescript";
 import { createItemsExpression } from "./createItemsExpression";
+import { createObjectLiteral } from "./createObjectLiteral";
 
 export function createFunctionSchemaExpression(schema: any, className: string, automated: boolean, parser: string): ts.Expression {
   return ts.factory.createObjectLiteralExpression(
@@ -48,35 +49,13 @@ export function createFunctionSchemaExpression(schema: any, className: string, a
                 "properties",
                 ts.factory.createObjectLiteralExpression(
                   Object.entries(schema.function.parameters.properties).map(
-                    ([key, value]: [string, any]) =>
+                    ([key, propertySchema]: [string, any]) => // propertySchema is the schema for this property
                       ts.factory.createPropertyAssignment(
-                        key,
-                        ts.factory.createObjectLiteralExpression([
-                          ts.factory.createPropertyAssignment(
-                            "type",
-                            value.type === 'array'
-                              ? ts.factory.createStringLiteral(value.type)
-                              : Array.isArray(value.type)
-                                ? ts.factory.createArrayLiteralExpression(
-                                    value.type.map((t: string) =>
-                                      ts.factory.createStringLiteral(t)
-                                    )
-                                  )
-                                : ts.factory.createStringLiteral(value.type)
-                          ),
-                          ts.factory.createPropertyAssignment(
-                            "description",
-                            ts.factory.createStringLiteral(value.description)
-                          ),
-                          ...(value.type === 'array' ? [
-                            ts.factory.createPropertyAssignment(
-                              "items",
-                              createItemsExpression(value.items)
-                            )
-                          ] : [])
-                        ])
+                        ts.factory.createStringLiteral(key), // Use createStringLiteral for safety
+                        createObjectLiteral(propertySchema) // Use the main createObjectLiteral
                       )
-                  )
+                  ),
+                  true // multiline
                 )
               ),
               ts.factory.createPropertyAssignment(
