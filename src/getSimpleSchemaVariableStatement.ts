@@ -18,40 +18,12 @@ export function getSimpleSchemaVariableStatement(
   const typeName = typeChecker.typeToString(
     typeChecker.getTypeAtLocation(parameter)
   );
+  const parameterName = parameter.name.getText();
+  const parameterDescription =
+    parameterDescriptions[parameterName]?.description ?? "";
+
   // union type with |
   const types = typeName.split("|").map((t) => t.trim());
-
-  if (types.length > 1) {
-    const functionSchema = {
-      type: "function",
-      function: {
-        name: methodName,
-        description: methodDescription,
-        strict,
-        parameters: [
-          {
-            name: parameter.name.getText(),
-            type: types,
-            description:
-              parameterDescriptions[parameter.name.getText()]?.description ??
-              "",
-          },
-        ],
-      },
-    };
-
-    const functionSchemaExpression =
-      createSimpleFunctionSchemaExpression(functionSchema, className, automate, parser);
-
-    const schemaVariableName = `__${methodName}__json__schema`;
-
-    const functionSchemaVariableDeclaration = createVariableStatement(
-      schemaVariableName,
-      functionSchemaExpression
-    );
-
-    return functionSchemaVariableDeclaration;
-  }
 
   const functionSchema = {
     type: "function",
@@ -59,14 +31,16 @@ export function getSimpleSchemaVariableStatement(
       name: methodName,
       description: methodDescription,
       strict,
-      parameters: [
-        {
-          name: parameter.name.getText(),
-          type: typeName,
-          description:
-            parameterDescriptions[parameter.name.getText()]?.description ?? "",
+      parameters: {
+        type: "object",
+        properties: {
+          [parameterName]: {
+            type: types.length > 1 ? types : typeName,
+            description: parameterDescription,
+          },
         },
-      ],
+        required: [parameterName],
+      },
     },
   };
 

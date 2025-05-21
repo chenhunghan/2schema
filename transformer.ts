@@ -103,7 +103,7 @@ export default function transformerProgram(program: ts.Program) {
                 );
               }
 
-              const paramaterDescriptions =
+              const parameterDescriptions = 
                 getParameterDescriptions(fnDecorator);
 
               if (method.parameters.length === 1) {
@@ -125,7 +125,7 @@ export default function transformerProgram(program: ts.Program) {
                       typeChecker,
                       methodName,
                       functionDescription,
-                      paramaterDescriptions,
+                      parameterDescriptions, 
                       strict,
                       parameter,
                       className,
@@ -171,9 +171,10 @@ export default function transformerProgram(program: ts.Program) {
                   );
 
                   const functionSchema = getArraySchemaVariableStatement(
-                    methodName,
+                    methodName, // Reverted debug change
                     functionDescription,
-                    paramaterDescriptions,
+                    parameterDescriptions,
+                    // REMOVED extra parameterDescriptions
                     strict,
                     parameter,
                     elementTypeString,
@@ -227,9 +228,10 @@ export default function transformerProgram(program: ts.Program) {
                    : elementTypeString;
 
                   const functionSchema = getArraySchemaVariableStatement(
-                    methodName,
+                    methodName, // Reverted debug change
                     functionDescription,
-                    paramaterDescriptions,
+                    parameterDescriptions,
+                    // REMOVED extra parameterDescriptions
                     strict,
                     parameter,
                     elementType,
@@ -291,34 +293,49 @@ export default function transformerProgram(program: ts.Program) {
 
               for (const parameter of method.parameters) {
                 const parameterType = typeChecker.getTypeAtLocation(parameter);
-                const parameterTypeInfo = getTypeInfoFromObject(
+                // Pass parameterDescriptions to getTypeInfoFromObject
+                // For the top-level parameter itself, its name is parameter.name.getText()
+                // However, getTypeInfoFromObject is designed to find descriptions for *properties within* this parameter if it's an object.
+                // So, we pass the full parameterDescriptions map. getTypeInfoFromObject will use the 'propertyName' argument
+                // during its recursive calls for object properties.
+                const rawParameterTypeInfo = getTypeInfoFromObject(
                   parameterType,
-                  typeChecker
+                  typeChecker,
+                  parameterDescriptions, 
+                  parameter.name.getText() 
                 );
-                for (const parameterPropertyKey of Object.keys(
-                  parameterTypeInfo
-                )) {
-                  const parameterType = parameterTypeInfo[parameterPropertyKey];
 
-                  functionSchema.function.parameters.properties[
-                    parameterPropertyKey
-                  ] = {
-                    // if the type is a union type, split it into an array
-                    type: parameterType?.includes?.("|")
-                      ? parameterType
-                          ?.split("|")
-                          .map((t) => t.trim())
-                      : (
-                        parameterType?.type === "array" ? parameterType?.type : parameterType
-                      ),
-                    description:
-                    parameterType
-                        ?.description ?? "",
-                    ...{ ...(parameterType?.type === "array" ? { items: parameterType?.items } : {})}
-                  };
-                  functionSchema.function.parameters.required.push(
-                    parameterPropertyKey
-                  );
+                // Ensure rawParameterTypeInfo is in the expected { type: "object", properties: {}, ... } format
+                const parameterSchema = (typeof rawParameterTypeInfo === 'string') 
+                  ? { type: rawParameterTypeInfo, properties: {}, required: [] } // Should not happen for objects
+                  : rawParameterTypeInfo;
+
+                if (parameterSchema.type === "object" && parameterSchema.properties) {
+                  for (const parameterPropertyKey of Object.keys(
+                    parameterSchema.properties
+                  )) {
+                    const propertyDetails =
+                      parameterSchema.properties[parameterPropertyKey];
+                    
+                    // Construct the schema for the individual property
+                    // propertyDetails is already a schema object from getTypeInfoFromObject
+                    functionSchema.function.parameters.properties[parameterPropertyKey] = propertyDetails;
+                  }
+                  // Add required properties from the parameter's schema
+                  if (parameterSchema.required) {
+                    functionSchema.function.parameters.required.push(...parameterSchema.required);
+                  }
+                } else if (typeof parameterSchema === 'string' || (parameterSchema.type && typeof parameterSchema.type === 'string' && !parameterSchema.properties)) {
+                  // Handle cases where the parameter itself is a simple type (e.g. a top-level string, number)
+                  // This path should ideally not be hit if parameters are always objects/interfaces
+                  // or if simple parameters are handled by getSimpleSchemaVariableStatement exclusively.
+                  // However, as a fallback:
+                  const paramName = parameter.name.getText();
+                   functionSchema.function.parameters.properties[paramName] = {
+                       type: typeof parameterSchema === 'string' ? parameterSchema : parameterSchema.type,
+                       description: "" // No description available here
+                   };
+                   functionSchema.function.parameters.required.push(paramName);
                 }
               }
 
